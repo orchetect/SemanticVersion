@@ -1,6 +1,6 @@
 //
 //  SemanticVersion.swift
-//  SharedCode
+//  SemanticVersion
 //
 //  Created by Steffan Andrews on 2020-06-10.
 //  Copyright © 2020 Steffan Andrews. All rights reserved.

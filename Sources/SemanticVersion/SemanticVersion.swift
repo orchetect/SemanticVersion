@@ -21,7 +21,6 @@ public struct SemanticVersion: CustomStringConvertible {
 	/// Third number from short version
 	public var build: Int?
 	
-	/// CUSTOM SHARED:
 	/// Parses a short version string in the form of X.X.X (major, minor, build #)
 	public init(from string: String) {
 		

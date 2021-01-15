@@ -6,8 +6,6 @@
 //  Copyright © 2020 Steffan Andrews. All rights reserved.
 //
 
-import Foundation
-
 /// Struct that can parse a basic SemVer version string into its components
 /// ie: 1.2.450
 public struct SemanticVersion: CustomStringConvertible {

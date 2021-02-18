@@ -6,9 +6,11 @@
 //  Copyright © 2020 Steffan Andrews. All rights reserved.
 //
 
+import Foundation
+
 /// Struct that can parse a basic SemVer version string into its components
 /// ie: 1.2.450
-public struct SemanticVersion: CustomStringConvertible {
+public struct SemanticVersion {
 	
 	/// First number from short version
 	public var major: Int?
@@ -19,10 +21,16 @@ public struct SemanticVersion: CustomStringConvertible {
 	/// Third number from short version
 	public var build: Int?
 	
+}
+
+extension SemanticVersion: RawRepresentable {
+	
+	public var rawValue: String { description }
+	
 	/// Parses a short version string in the form of X.X.X (major, minor, build #)
-	public init(from string: String) {
+	public init?(rawValue: String) {
 		
-		let components = string
+		let components = rawValue
 			.split(separator: ".")
 			.map { String($0) }
 		
@@ -31,6 +39,34 @@ public struct SemanticVersion: CustomStringConvertible {
 		if components.count > 2 { build = Int(components[2]) }
 		
 	}
+	
+}
+
+extension SemanticVersion: Equatable {
+	
+	public static func == (lhs: Self, rhs: Self) -> Bool {
+		
+		lhs.major == rhs.major
+			&& lhs.minor == rhs.minor
+			&& lhs.build == rhs.build
+		
+	}
+	
+}
+
+extension SemanticVersion: Comparable {
+	
+	public static func < (lhs: Self, rhs: Self) -> Bool {
+		
+		lhs.rawValue.compare(rhs.rawValue, options: .numeric)
+			== .orderedAscending
+		
+	}
+	
+}
+
+
+extension SemanticVersion: CustomStringConvertible {
 	
 	public var description: String {
 		
@@ -54,5 +90,9 @@ public struct SemanticVersion: CustomStringConvertible {
 		return outputString
 		
 	}
+	
+}
+
+extension SemanticVersion: Codable {
 	
 }
